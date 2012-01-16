@@ -1,0 +1,6 @@
+Author:
+	Luke Queenan
+
+Objective:
+	Use multiple processes and threads on *nix based operating systems and measure the performance and efficiency of each mechanism.
+
