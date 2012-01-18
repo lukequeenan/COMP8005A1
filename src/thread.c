@@ -15,8 +15,8 @@ int startThreads(long numberOfThreads)
     pthread_t *threads = malloc(numberOfThreads * sizeof(pthread_t));
     struct timeval *startTime = malloc(numberOfThreads * 
                                        sizeof(struct timeval));
-    struct timeval *endTime;
-    long *runTime = malloc(numberOfThreads * sizeof(long));
+    struct timeval *endTime = malloc(numberOfThreads * sizeof(struct timeval));
+    long runTime = 0;
     pthread_attr_t attr;
     long count = 0;
     int result = 0;
@@ -42,7 +42,8 @@ int startThreads(long numberOfThreads)
     for (count = 0; count < numberOfThreads; count++)
     {
         gettimeofday(&startTime[count], NULL);
-        result = pthread_create(&threads[count], &attr, runThread, NULL);
+        result = pthread_create(&threads[count], &attr, runThread, 
+                                (void *)&endTime[count]);
         printf("%lu\n", count);
     }
     
@@ -52,24 +53,31 @@ int startThreads(long numberOfThreads)
     /* Reap the threads as they finish and retrieve their end time */
     for (count = 0; count < numberOfThreads; count++)
     {
-        result = pthread_join(threads[count], (void*)&endTime);
+        result = pthread_join(threads[count], NULL);
+    }
+    
+    /* Print results to screen for now */
+    for (count = 0; count < numberOfThreads; count++)
+    {
+        runTime = (endTime[count].tv_sec * 1000000 + endTime[count].tv_usec) -
+                    (startTime[count].tv_sec * 1000000
+                     + startTime[count].tv_usec);
+        printf("Thread %lu runtime: %ld\n", count, runTime);
     }
     
     /* Free memory and return */
     free(threads);
     free(startTime);
-    free(runTime);
-    
-    /*pthread_exit(NULL);*/
+    free(endTime);
     
     return 0;
 }
 
-void *runThread()
+void *runThread(void *endTime)
 {
-    struct timeval endTime;
+    struct timeval *time = endTime;
     /* Call the prime number function. */
     printf("hello from a thread!\n");
-    gettimeofday(&endTime, NULL);
-    pthread_exit(endTime);
+    gettimeofday(time, NULL);
+    pthread_exit(NULL);
 }
