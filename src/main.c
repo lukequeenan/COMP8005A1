@@ -25,13 +25,13 @@ int main (int argc, char **argv)
         {
             case 'p':
                 numberOfWorkers = atol(optarg);
-                printf("Spawning %d processes\n", numberOfWorkers);
-                /* call process program here*/
+                printf("Spawning %lu processes\n", numberOfWorkers);
+                startProcesses(numberOfWorkers);
                 break;
             case 't':
                 numberOfWorkers = atol(optarg);
-                printf("Spawning %d threads\n", numberOfWorkers);
-                /* call thread program here*/
+                printf("Spawning %lu threads\n", numberOfWorkers);
+                startThreads(numberOfWorkers);
                 break;
             case '?':
             default:
