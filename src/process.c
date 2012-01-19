@@ -7,22 +7,30 @@
 #include "process.h"
 
 /* Local prototypes */
-void runProcess(long starttime);
+void runProcess();
 
 int startProcesses(long numberOfProcesses)
 {
     int pid = 0;
-    int count = 0;
+    long count = 0;
     struct timeval startTime;
+    struct timeval endTime;
+    long runTime = 0;
     
     for (count = 0; count < numberOfProcesses; count++)
     {
         /* Get time before fork */
         gettimeofday(&startTime, NULL);
+        
+        /* Fork, run process, print time, exit */
         if ((pid = fork()) == 0)
         {
-            runProcess(startTime.tv_sec * 1000000 + startTime.tv_usec);
-            break;
+            runProcess();
+            gettimeofday(&endTime, NULL);
+            runTime = (endTime.tv_sec * 1000000 + endTime.tv_usec) -
+                        (startTime.tv_sec * 1000000 + startTime.tv_usec);
+            printf("Process %lu runtime: %ld\n", count, runTime);
+            return 0;
         }
         else if (pid == -1)
         {
@@ -33,15 +41,8 @@ int startProcesses(long numberOfProcesses)
     return 0;
 }
 
-void runProcess(long startTime)
+void runProcess()
 {
-    struct timeval endTime;
-    long runTime = 0;
-    
     /* Call function here */
-    
-    /* Get end time */
-    gettimeofday(&endTime, NULL);
-    runTime = (endTime.tv_sec * 1000000 + endTime.tv_usec) - startTime;
-    printf("hello from a process!\n");
+
 }

@@ -44,13 +44,12 @@ int startThreads(long numberOfThreads)
         gettimeofday(&startTime[count], NULL);
         result = pthread_create(&threads[count], &attr, runThread, 
                                 (void *)&endTime[count]);
-        printf("%lu\n", count);
     }
     
     /* Reclaim some memory */
     pthread_attr_destroy(&attr);
     
-    /* Reap the threads as they finish and retrieve their end time */
+    /* Reap the threads as they finish */
     for (count = 0; count < numberOfThreads; count++)
     {
         result = pthread_join(threads[count], NULL);
@@ -76,8 +75,9 @@ int startThreads(long numberOfThreads)
 void *runThread(void *endTime)
 {
     struct timeval *time = endTime;
+    
     /* Call the prime number function. */
-    printf("hello from a thread!\n");
+    
     gettimeofday(time, NULL);
     pthread_exit(NULL);
 }
