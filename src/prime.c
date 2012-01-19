@@ -7,7 +7,6 @@ void factorize(int n)
     
     if(n < 2) return;
     
-    printf("<strong class="highlight">Prime</strong> factors of '%d': ", n);
     /* while the factor being tested
      * is lower than the number to factorize */
     while(d < n) {
