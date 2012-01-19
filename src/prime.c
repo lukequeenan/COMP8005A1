@@ -1,6 +1,7 @@
 /* Find out the prime factors
  * of a given number and print
- * them on the screen */
+ * them on the screen 
+ * Author: Mathias Van Malderen */
 void factorize(int n)
 {
     int d = 2;
