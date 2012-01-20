@@ -5,11 +5,14 @@ BUILDDIR=/bin
 VPATH=src
 SRC=src/
 
-project: process.o thread.o main.o
-	$(CC) $(CFLAGS) main.o process.o thread.o -o $(NAME)
+project: prime.o process.o thread.o main.o
+	$(CC) $(CFLAGS) main.o process.o thread.o prime.o -o $(NAME)
 
 clean:
 	rm -f *.o *.bak *.out ex
+
+prime.o: prime.c prime.h
+	$(CC) $(CFLAGS) -O -c prime.c
 
 process.o: process.c process.h
 	$(CC) $(CFLAGS) -O -c process.c

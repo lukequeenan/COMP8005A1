@@ -5,9 +5,7 @@
 
 /* User includes */
 #include "process.h"
-
-/* Local prototypes */
-void runProcess();
+#include "prime.h"
 
 int startProcesses(long numberOfProcesses)
 {
@@ -25,7 +23,7 @@ int startProcesses(long numberOfProcesses)
         /* Fork, run process, print time, exit */
         if ((pid = fork()) == 0)
         {
-            runProcess();
+            prime('p', count, 0, 100000);
             gettimeofday(&endTime, NULL);
             runTime = (endTime.tv_sec * 1000000 + endTime.tv_usec) -
                         (startTime.tv_sec * 1000000 + startTime.tv_usec);
@@ -39,10 +37,4 @@ int startProcesses(long numberOfProcesses)
     }
 
     return 0;
-}
-
-void runProcess()
-{
-    /* Call function here */
-
 }

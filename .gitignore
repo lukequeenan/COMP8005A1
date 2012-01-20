@@ -2,3 +2,4 @@
 *.out
 *.o
 .DS_Store
+dmp/
