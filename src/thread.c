@@ -1,9 +1,3 @@
-/* System includes */
-#include <pthread.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/time.h>
-
 /* User includes */
 #include "thread.h"
 #include "prime.h"

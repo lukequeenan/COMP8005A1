@@ -1,12 +1,13 @@
 CC=gcc
 CFLAGS=-W -Wall -ansi -pedantic
+PFLAG=-lpthread
 NAME=COMP8005A1.out
 BUILDDIR=/bin
 VPATH=src
 SRC=src/
 
 project: prime.o process.o thread.o main.o
-	$(CC) $(CFLAGS) main.o process.o thread.o prime.o -o $(NAME)
+	$(CC) $(CFLAGS) $(PFLAG) main.o process.o thread.o prime.o -o $(NAME)
 
 clean:
 	rm -f *.o *.bak *.out ex
