@@ -54,7 +54,7 @@ int startThreads(long numberOfThreads)
     for (count = 0; count < numberOfThreads; count++)
     {
         runTime = endTime[count] - (startTime[count].tv_sec * 1000000 +
-                                    startTime[count].tv_usec);
+                                    startTime[count].tv_usec) / 1000000;
         printf("%ld\n", runTime);
     }
     

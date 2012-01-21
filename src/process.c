@@ -26,7 +26,7 @@ int startProcesses(long numberOfProcesses)
             prime('p', count, 0, 100000);
             gettimeofday(&endTime, NULL);
             runTime = (endTime.tv_sec * 1000000 + endTime.tv_usec) -
-                        (startTime.tv_sec * 1000000 + startTime.tv_usec);
+                    (startTime.tv_sec * 1000000 + startTime.tv_usec) / 1000000;
             printf("%ld\n", runTime);
             return 0;
         }
