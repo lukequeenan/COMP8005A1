@@ -3,3 +3,5 @@
 *.o
 .DS_Store
 dmp/*
+p.txt
+t.txt
