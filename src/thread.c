@@ -55,7 +55,7 @@ int startThreads(long numberOfThreads)
     {
         runTime = endTime[count] - (startTime[count].tv_sec * 1000000 +
                                     startTime[count].tv_usec);
-        printf("Thread %lu runtime: %ld\n", count, runTime);
+        printf("%ld\n", runTime);
     }
     
     /* Free memory and return */

@@ -27,7 +27,7 @@ int startProcesses(long numberOfProcesses)
             gettimeofday(&endTime, NULL);
             runTime = (endTime.tv_sec * 1000000 + endTime.tv_usec) -
                         (startTime.tv_sec * 1000000 + startTime.tv_usec);
-            printf("Process %lu runtime: %ld\n", count, runTime);
+            printf("%ld\n", runTime);
             return 0;
         }
         else if (pid == -1)
