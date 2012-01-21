@@ -13,7 +13,6 @@ int startProcesses(long numberOfProcesses)
     long count = 0;
     struct timeval startTime;
     struct timeval endTime;
-    long runTime = 0;
     
     for (count = 0; count < numberOfProcesses; count++)
     {
@@ -25,9 +24,8 @@ int startProcesses(long numberOfProcesses)
         {
             prime('p', count, 0, 100000);
             gettimeofday(&endTime, NULL);
-            runTime = (endTime.tv_sec * 1000000 + endTime.tv_usec) -
-                    (startTime.tv_sec * 1000000 + startTime.tv_usec) / 1000000;
-            printf("%ld\n", runTime);
+            printf("%ld\n", (endTime.tv_sec + endTime.tv_usec / 1000000) -
+                             (startTime.tv_sec + startTime.tv_usec / 1000000));
             return 0;
         }
         else if (pid == -1)

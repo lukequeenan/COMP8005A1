@@ -10,8 +10,7 @@ int startThreads(long numberOfThreads)
     pthread_t *threads = malloc(numberOfThreads * sizeof(pthread_t));
     struct timeval *startTime = malloc(numberOfThreads * 
                                        sizeof(struct timeval));
-    long *endTime = malloc(numberOfThreads * sizeof(long));
-    long runTime = 0;    
+    long *endTime = malloc(numberOfThreads * sizeof(long));    
     long count = 0;
     int result = 0;
     pthread_attr_t attr;
@@ -53,9 +52,8 @@ int startThreads(long numberOfThreads)
     /* Print results to screen for now */
     for (count = 0; count < numberOfThreads; count++)
     {
-        runTime = endTime[count] - (startTime[count].tv_sec * 1000000 +
-                                    startTime[count].tv_usec) / 1000000;
-        printf("%ld\n", runTime);
+        printf("%ld\n", (endTime[count] - (startTime[count].tv_sec +
+                                  startTime[count].tv_usec) / 1000000));
     }
     
     /* Free memory and return */
@@ -74,7 +72,7 @@ void *runThread(void *number)
     prime('t', (long)number, 0, 100000);
     
     gettimeofday(&endTime, NULL);
-    time = endTime.tv_sec * 1000000 + endTime.tv_usec;
+    time = endTime.tv_sec + endTime.tv_usec / 1000000;
     
     pthread_exit((void*)time);
 }
