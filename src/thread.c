@@ -71,7 +71,7 @@ void *runThread(void *number)
     struct timeval endTime;
     long time = 0;
     
-    prime('t', (long)number, 0, 50000);
+    prime('t', (long)number, 0, 100000);
     
     gettimeofday(&endTime, NULL);
     time = endTime.tv_sec * 1000000 + endTime.tv_usec;
