@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-W -Wall -ansi -pedantic
-PFLAG=-lpthread
+CFLAGS=-W -Wall -pedantic
+PFLAG=-lpthread -pthread
 NAME=COMP8005A1.out
 BUILDDIR=/bin
 VPATH=src

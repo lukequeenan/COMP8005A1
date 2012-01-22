@@ -1,5 +1,6 @@
 /* User includes */
 #include "thread.h"
+#include "pthread.h"
 #include "prime.h"
 
 /* Local prototypes */

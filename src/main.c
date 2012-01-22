@@ -47,3 +47,4 @@ void usage(char *name)
     fprintf(stderr, "Usage: %s -p [number of processes to spawn] -t [number of"
             " threads to spawn]\n", name);
 }
+
