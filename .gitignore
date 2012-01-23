@@ -3,5 +3,6 @@
 *.o
 .DS_Store
 dmp/*
+results/*
 p.txt
 t.txt
