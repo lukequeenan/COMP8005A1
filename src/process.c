@@ -22,15 +22,15 @@ int startProcesses(long numberOfProcesses)
         /* Fork, run process, print time, exit */
         if ((pid = fork()) == 0)
         {
-            if (prime('p', count, 0, 20000) == -1)
+            if (prime('p', count, 0, 50000) == -1)
             {
                 printf("Error in Process\n");
             }
             else
             {
                 gettimeofday(&endTime, NULL);
-                printf("%ld\n", (endTime.tv_sec + endTime.tv_usec / 1000000) -
-                       (startTime.tv_sec + startTime.tv_usec / 1000000));                
+                printf("%ld\n", (endTime.tv_sec * 1000000 + endTime.tv_usec) -
+                       (startTime.tv_sec * 1000000 + startTime.tv_usec));                
             }
 
             return 0;

@@ -57,8 +57,8 @@ int startThreads(long numberOfThreads)
         }
         else
         {
-            printf("%ld\n", endTime[count] - (startTime[count].tv_sec +
-                                  startTime[count].tv_usec / 1000000));
+            printf("%ld\n", endTime[count] - (startTime[count].tv_sec * 1000000
+                                              + startTime[count].tv_usec));
         }
     }
     
@@ -76,14 +76,14 @@ void *runThread(void *number)
     long int time = 0;
     
     /* Make sure there were no errors in the prime function */
-    if (prime('t', (long)number, 0, 20000) == -1)
+    if (prime('t', (long)number, 0, 50000) == -1)
     {
         time = -1;
     }
     else
     {
         gettimeofday(&endTime, NULL);
-        time = endTime.tv_sec + endTime.tv_usec / 1000000; 
+        time = endTime.tv_sec * 1000000 + endTime.tv_usec; 
     }
     
     pthread_exit((void*)time);
