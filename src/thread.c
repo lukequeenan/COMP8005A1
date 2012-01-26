@@ -27,10 +27,10 @@ int startThreads(long numberOfThreads)
     /* Set the thread for kernel management. This means that system calls will
      not block all threads in the process and that individual threads can be
      assigned to indiviudal processors in the system. */
-    if (pthread_attr_setscope(&attr, PTHREAD_SCOPE_SYSTEM) != 0)
+    /*if (pthread_attr_setscope(&attr, PTHREAD_SCOPE_SYSTEM) != 0)
     {
         /* error */
-    }
+    /*}
     
     /* Make the threads and get their start time */
     for (count = 0; count < numberOfThreads; count++)
@@ -51,8 +51,8 @@ int startThreads(long numberOfThreads)
     /* Print results to screen for now */
     for (count = 0; count < numberOfThreads; count++)
     {
-        printf("%ld\n", endTime[count] - (startTime[count].tv_sec +
-                                  startTime[count].tv_usec / 1000000));
+        printf("%ld\n", endTime[count] - (startTime[count].tv_sec * 1000000 +
+                                  startTime[count].tv_usec));
     }
     
     /* Free memory and return */
@@ -68,10 +68,10 @@ void *runThread(void *number)
     struct timeval endTime;
     long int time = 0;
     
-    prime('t', (long)number, 0, 5000);
+    prime('t', (long)number, 0, 50000);
     
     gettimeofday(&endTime, NULL);
-    time = endTime.tv_sec + endTime.tv_usec / 1000000;
+    time = endTime.tv_sec * 1000000 + endTime.tv_usec;
     
     pthread_exit((void*)time);
 }
