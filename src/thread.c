@@ -13,7 +13,6 @@ int startThreads(long numberOfThreads)
                                        sizeof(struct timeval));
     long int *endTime = malloc(numberOfThreads * sizeof(long int));    
     long count = 0;
-    int result = 0;
     pthread_attr_t attr;
     
     /* Create the reusable thread attributes. */
@@ -37,8 +36,7 @@ int startThreads(long numberOfThreads)
     for (count = 0; count < numberOfThreads; count++)
     {
         gettimeofday(&startTime[count], NULL);
-        result = pthread_create(&threads[count], &attr, runThread, 
-                                (void *)count);
+        pthread_create(&threads[count], &attr, runThread, (void *)count);
     }
     
     /* Reclaim some memory */
@@ -47,7 +45,7 @@ int startThreads(long numberOfThreads)
     /* Reap the threads as they finish */
     for (count = 0; count < numberOfThreads; count++)
     {
-        result = pthread_join(threads[count], (void*)&endTime[count]);
+        pthread_join(threads[count], (void*)&endTime[count]);
     }
     
     /* Print results to screen for now */
@@ -70,7 +68,7 @@ void *runThread(void *number)
     struct timeval endTime;
     long int time = 0;
     
-    prime('t', (long)number, 0, 100000);
+    prime('t', (long)number, 0, 5000);
     
     gettimeofday(&endTime, NULL);
     time = endTime.tv_sec + endTime.tv_usec / 1000000;
