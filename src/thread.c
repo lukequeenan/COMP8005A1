@@ -51,8 +51,15 @@ int startThreads(long numberOfThreads)
     /* Print results to screen for now */
     for (count = 0; count < numberOfThreads; count++)
     {
-        printf("%ld\n", endTime[count] - (startTime[count].tv_sec +
+        if (endTime[count] == -1)
+        {
+            printf("Error in Thread\n");
+        }
+        else
+        {
+            printf("%ld\n", endTime[count] - (startTime[count].tv_sec +
                                   startTime[count].tv_usec / 1000000));
+        }
     }
     
     /* Free memory and return */
@@ -68,10 +75,16 @@ void *runThread(void *number)
     struct timeval endTime;
     long int time = 0;
     
-    prime('t', (long)number, 0, 5000);
-    
-    gettimeofday(&endTime, NULL);
-    time = endTime.tv_sec + endTime.tv_usec / 1000000;
+    /* Make sure there were no errors in the prime function */
+    if (prime('t', (long)number, 0, 20000) == -1)
+    {
+        time = -1;
+    }
+    else
+    {
+        gettimeofday(&endTime, NULL);
+        time = endTime.tv_sec + endTime.tv_usec / 1000000; 
+    }
     
     pthread_exit((void*)time);
 }

@@ -54,7 +54,10 @@ int prime(char type, long number, long start, long end)
     {
         factorize(start, file);
     }
-    fclose(file);
+    if (fclose(file))
+    {
+        return -1;
+    }
     free(name);
     return 0;
 }
